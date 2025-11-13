@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40" viewBox="0 0 160 40">
+  <defs>
+    <style>.t{font-family:Inter, sans-serif; font-weight:600; font-size:14px; fill:#ffffff}</style>
+  </defs>
+  <rect width="160" height="40" rx="8" fill="none"/>
+  <g transform="translate(4,4)">
+    <!-- brush circle -->
+    <g transform="translate(0,0)">
+      <path d="M6 18c6-6 18-6 24 0c6 6 6 18 0 24c-6 6-18 6-24 0c-6-6-6-18 0-24z" fill="#fff5fb" opacity="0.95"/>
+      <path d="M12 10c8-4 18 0 22 6l-6 6c-6-6-14-8-16-8c-2-2-0-4 0-4z" fill="#ffb6d9"/>
+    </g>
+  </g>
+  <text class="t" x="48" y="22">Emy’Art Mockup Studio</text>
+</svg>
