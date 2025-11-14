@@ -1,3 +1,12 @@
 {
-  "license": "Emy Medina"
+  "licenseKey": "EMY-ART-2025-PRIV-001",
+  "owner": "Emy Medina",
+  "validUntil": "2028-12-31",
+  "features": [
+    "mockups_infantiles",
+    "mockups_adultos",
+    "fondos_personalizados",
+    "protegido_autor",
+    "modo_privado"
+  ]
 }
