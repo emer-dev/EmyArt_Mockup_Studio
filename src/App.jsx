@@ -18,15 +18,15 @@ export default function App(){
   useEffect(()=>{
     const stored = localStorage.getItem('emyart_license')
     if(stored) validateLicense(stored)
-    // eslint-disable-next-line
   },[])
 
   async function validateLicense(key){
     setChecking(true)
     try {
       const res = await fetch('/api/validate-license', {
-        method:'POST', headers:{ 'Content-Type':'application/json' },
-        body: JSON.stringify({ license: key })
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ licenseKey: key })   // 👈 CORREGIDO
       })
       const j = await res.json()
       setChecking(false)
@@ -70,8 +70,12 @@ export default function App(){
             style={{width:'100%', padding:10, marginTop:8, borderRadius:6, border:'1px solid #333', background:'#0f0f0f', color:'#fff'}}
           />
           <div style={{display:'flex', gap:8, marginTop:12}}>
-            <button onClick={()=>validateLicense(licenseInput)} style={{flex:1, padding:10, background:'#f8c8de', color:'#111', borderRadius:6}}>Validar licencia</button>
-            <button onClick={()=>{ setLicenseInput(''); localStorage.removeItem('emyart_license'); }} style={{padding:10, borderRadius:6, background:'#333', color:'#fff'}}>Limpiar</button>
+            <button onClick={()=>validateLicense(licenseInput)} style={{flex:1, padding:10, background:'#f8c8de', color:'#111', borderRadius:6}}>
+              Validar licencia
+            </button>
+            <button onClick={()=>{ setLicenseInput(''); localStorage.removeItem('emyart_license'); }} style={{padding:10, borderRadius:6, background:'#333', color:'#fff'}}>
+              Limpiar
+            </button>
           </div>
           <div style={{marginTop:12, fontSize:13, color:'#bbb'}}>
             {checking && <div>Validando...</div>}
@@ -93,7 +97,13 @@ export default function App(){
       </header>
       <div className="content">
         <div className="viewer-panel">
-          <Viewer ref={viewerRef} modelPath={model} color={color} design={design} decalParams={decalParams} />
+          <Viewer
+            ref={viewerRef}
+            modelPath={model}
+            color={color}
+            design={design}
+            decalParams={decalParams}
+          />
         </div>
         <div className="side-panel">
           <Controls
@@ -102,12 +112,20 @@ export default function App(){
             model={model}
             setModel={setModel}
             onUploadDesign={(file)=>{ const url = URL.createObjectURL(file); setDesign(url) }}
-            onExportPNG={async ()=>{ const dataURL = await viewerRef.current.exportPNG(2000,2000); const a = document.createElement('a'); a.href = dataURL; a.download='mockup.png'; a.click(); }}
+            onExportPNG={async ()=>{
+              const dataURL = await viewerRef.current.exportPNG(2000,2000)
+              const a = document.createElement('a')
+              a.href = dataURL
+              a.download='mockup.png'
+              a.click()
+            }}
           />
           <DecalEditor decalParams={decalParams} setDecalParams={setDecalParams} />
           <div style={{marginTop:12, color:'#ddd'}}>
             <div style={{fontSize:13}}>Usuario: {validInfo?.owner || 'Propietaria'}</div>
-            <button onClick={handleLogout} style={{marginTop:8, padding:8, background:'#222', color:'#fff', borderRadius:6}}>Cerrar sesión</button>
+            <button onClick={handleLogout} style={{marginTop:8, padding:8, background:'#222', color:'#fff', borderRadius:6}}>
+              Cerrar sesión
+            </button>
             <div style={{marginTop:12, fontSize:11, color:'#aaa'}}>© 2025 Emy’Art Mockup Studio – Creado por Emerlys Medina</div>
           </div>
         </div>
